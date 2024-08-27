@@ -1,5 +1,19 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { UpdateTaskDto } from './dto/update-task.dto';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('/tasks')
 export class TasksController {
@@ -7,19 +21,26 @@ export class TasksController {
   constructor(tasksService: TasksService) {
     this.tasksService = tasksService;
   }
-  @Get('')
-  getAllTasks() {
+
+  @Get()
+  getAllTasks(@Query() query: any) {
     return this.tasksService.getAllTasks();
   }
-  @Post() //{title: 'primer tarea', status: false} -> {title:'tarea 2',
-  //status:true
-  creatTask() {
-    return this.tasksService.createTask();
+
+  @Get('/:id')
+  getTask(@Param('id') id: string) {
+    return this.tasksService.getTask(parseInt(id));
   }
 
+  @Post()
+  @UsePipes(new ValidationPipe())
+  createTask(@Body() task: CreateTaskDto) {
+    console.log(task);
+    return this.tasksService.createTask(task);
+  }
   @Put()
-  updateTask() {
-    return this.tasksService.updateTask();
+  updateTask(@Body() task: UpdateTaskDto) {
+    return this.tasksService.updateTask(task);
   }
 
   @Delete()
