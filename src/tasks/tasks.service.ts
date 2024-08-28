@@ -24,8 +24,6 @@ export class TasksService {
     if (task) {
       return 'No hay tareas encontradas;';
     }
-    return ta;
-    sk;
   }
 
   createTask(task: CreateTaskDto) {
