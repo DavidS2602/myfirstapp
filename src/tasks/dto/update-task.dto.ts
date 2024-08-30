@@ -1,4 +1,4 @@
 export interface UpdateTaskDto {
-  title?: string;
-  description?: string;
+  title?: string
+  description?: string
 }
