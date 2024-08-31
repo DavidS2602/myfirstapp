@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: nestdb
+      POSTGRES_USER: davids2602
+      POSTGRES_PASSWORD: Dav950226+
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
