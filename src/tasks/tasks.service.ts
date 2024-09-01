@@ -1,50 +1,50 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UpdateTaskDto } from './dto/update-task.dto';
-import { CreateTaskDto } from './dto/create-task.dto';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { UpdateTaskDto } from './dto/update-task.dto'
+import { CreateTaskDto } from './dto/create-task.dto'
 
 export interface User {
-  name: string;
-  age: number;
+  name: string
+  age: number
 }
 
 @Injectable()
 export class TasksService {
-  private tasks = [];
+  private tasks = []
 
   getTask(id: number) {
-    const taskFound = this.tasks.find((task) => task.id === id);
+    const taskFound = this.tasks.find((task) => task.id === id)
     if (!taskFound) {
-      throw new NotFoundException(`Task with id ${id} not found`);
+      throw new NotFoundException(`Task with id ${id} not found`)
     }
-    return taskFound;
+    return taskFound
   }
 
   getAllTasks() {
-    const task = this.tasks;
+    const task = this.tasks
     if (task) {
-      return 'No hay tareas encontradas;';
+      return 'No hay tareas encontradas;'
     }
   }
 
   createTask(task: CreateTaskDto) {
-    console.log(task);
+    console.log(task)
     this.tasks.push({
       ...task,
       id: this.tasks.length + 1,
-    });
-    return task;
+    })
+    return task
   }
 
   updateTask(task: UpdateTaskDto) {
-    console.log(task);
-    return 'This task was updated successfully.';
+    console.log(task)
+    return 'This task was updated successfully.'
   }
 
   deleteTask() {
-    return 'This task was deleted successfully.';
+    return 'This task was deleted successfully.'
   }
 
   updateTaskStatus() {
-    return 'Actualizando el estado de una tarea';
+    return 'Actualizando el estado de una tarea'
   }
 }
